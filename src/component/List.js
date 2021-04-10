@@ -1,7 +1,7 @@
 import React from 'react'
 import SingleList from './singleList'
 
-export default function List({ listname, extraforOrder, extraforAdmin, item,total }) {
+export default function List({ listname, extraforOrder, extraforAdmin, item, total }) {
     return (
         <div className="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
             <h1>{listname}</h1>
@@ -20,17 +20,19 @@ export default function List({ listname, extraforOrder, extraforAdmin, item,tota
                             </th>
                             {extraforAdmin && (
                                 <th scope="col" className="border-0 bg-light">
-                                    <input className="btn btn-primary" type="button" value="Edit" />
-                                </th> ,
+                                    <div className="py-2 text-uppercase">Edit</div>
+                                </th>
+                            )}
+                            {extraforAdmin && (
                                 <th scope="col" className="border-0 bg-light">
-                                    <input className="btn btn-danger" type="button" value="Delete" />
+                                    <div className="py-2 text-uppercase">Delete</div>
                                 </th>
                             )}
                         </tr>
                     </thead>
                     <tbody>
-                        {item.map(product => <SingleList key={product._id} pc={product}/>)}
-                        
+                        {item.map(product => <SingleList key={product._id} pc={product} isAdmin={extraforAdmin} />)}
+
                         {extraforOrder && (
                             <tr>
                                 <th scope="row" className="border-0">

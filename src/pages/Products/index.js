@@ -10,7 +10,6 @@ export default function Products() {
         try {
             let response = await axios.get('/')
             setProducts(response.data)
-            console.log(products)
         } catch (e) {
             console.log(e)
         }

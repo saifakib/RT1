@@ -5,6 +5,12 @@ import Navbar from '../pages/Navbar'
 import Products from '../pages/Products'
 import Checkout from '../pages/Checkout'
 import Order from '../pages/Order'
+import Login from '../pages/Login'
+import Admin from '../pages/Admin'
+import CreateProduct from '../pages/Form/create'
+import EditProduct from '../pages/Form/edit'
+import DeleteProduct from '../pages/Delete'
+import PrivateRoute from '../component/PrivateRoute'
 import {
   Switch,
   Route
@@ -14,64 +20,36 @@ export const UserContext = createContext();
 
 function App() {
 
-  const [user, setUser] = useState({
-    _id: '6070948ba95daa311295c55d',
-    name: 'Saif Uddin',
-    email: 'kdfjl@gmail.com',
-    orders: [
-      {
-        _id: '56895768457',
-        name: 'jnvkjsfd',
-        price: 32
-      },
-      {
-        _id: '56895768457',
-        name: 'jnvkjsfd',
-        price: 32
-      },{
-        _id: '56895768457',
-        name: 'jnvkjsfd',
-        price: 32
-      },{
-        _id: '56895768457',
-        name: 'jnvkjsfd',
-        price: 32
-      },
-    ],
-    checkouts: [
-      {
-        _id: '56895768457',
-        name: 'jnvkjsfd',
-        price: 32
-      },{
-        _id: '56895768457',
-        name: 'jnvkjsfd',
-        price: 32
-      },{
-        _id: '56895768457',
-        name: 'jnvkjsfd',
-        price: 32
-      },{
-        _id: '56895768457',
-        name: 'jnvkjsfd',
-        price: 32
-      },
-    ]
-  })
+  const [user, setUser] = useState({})
+
+  const createUser = async ({ name, email }) => {
+    let newUser = await axios.post('createuser', {
+      name: name,
+      email: email
+    })
+    setUser(newUser.data)
+    console.log(user)
+  }
   return (
     <div>
-      <UserContext.Provider value={{ user, setUser }}>
+      <UserContext.Provider value={{ user, setUser, createUser }}>
         <Navbar />
         <Switch>
-          {/* <Route path="/login">
+          <Route path="/login">
             <Login />
-          </Route> */}
-          <Route path="/checkout">
+          </Route>
+          <Route exact path="/admin/product">
+            <Admin />
+          </Route>
+          <PrivateRoute exact path="/admin/product/create" component={CreateProduct}></PrivateRoute>
+          <Route exact path="/admin/product/:id/edit" component={EditProduct}></Route>
+          <PrivateRoute exact path="/admin/product/delete/:id" component={DeleteProduct}></PrivateRoute>
+          <PrivateRoute path="/checkout">
             <Checkout />
-          </Route>
-          <Route path="/Order">
+          </PrivateRoute>
+          <PrivateRoute path="/Order">
             <Order />
-          </Route>
+          </PrivateRoute>
           <Route exact path="/">
             <Products />
           </Route>

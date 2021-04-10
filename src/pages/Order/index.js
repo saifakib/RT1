@@ -11,7 +11,7 @@ export default function Order() {
             <div className="pb-5">
                 <div className="container">
                     <div className="row">
-                        <List listname="Order" item={user.checkouts} />
+                        <List extraforOrder={false} extraforAdmin={false} listname="Order" item={user.checkouts} />
                     </div>
                 </div>
             </div>

@@ -24,7 +24,7 @@ export default function Checkout() {
             <div className="pb-5">
                 <div className="container">
                     <div className="row">
-                        <List extraforOrder={true} listname="Checkout" item={user.checkouts} total={totalprice}/>
+                        <List extraforOrder={true} extraforAdmin={false} listname="Checkout" item={user.checkouts} total={totalprice}/>
                         <button className="btn btn-success float-right" onClick={ordered} style={{ width: '200px' }}>Checkout</button>
                     </div>
                 </div>

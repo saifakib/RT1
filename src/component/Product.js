@@ -13,8 +13,10 @@ export default function Product({ item }) {
             user_id: user._id
         })
     }
+    console.log(item)
 
     return (
+        
         <div className="col my-3">
             <div className="card h-100 shadow border-0 bdradious">
                 <img src={item.img} className="card-img-top" alt="..." />
