@@ -19,13 +19,14 @@ function EditProduct({ match }) {
     const onSubmit = data => {
         const eventData = {
             name: data.name,
-            imgurl: imgurl,
+            img: imgurl,
             price: data.price
         }
         updateData(eventData)
     }
     const updateData = (data) => {
         dbaxios.put(`/admin/product/${match.params.id}/edit`, data)
+        console.log(data)
         setConfirm(true)
     }
 
